@@ -1,0 +1,56 @@
+{
+  "model": "eleven_v3",
+  "default_settings": {
+    "stability": 0.4,
+    "similarity_boost": 0.75,
+    "style": 0.5,
+    "use_speaker_boost": true
+  },
+  "voices": {
+    "brian": {
+      "id": "nPczCjzI2devNBz1zQrb",
+      "vibe": "deep, resonant, comforting",
+      "use_for": "warm marketing narration, founder-led brand stories",
+      "pace": "medium-slow"
+    },
+    "bill": {
+      "id": "pqHfZKP75CvOlQylNhV4",
+      "vibe": "wise, mature, balanced",
+      "use_for": "editorial, thought-leadership, B2B explainers",
+      "pace": "medium"
+    },
+    "mark": {
+      "id": "UgBBYS2sOqTuMpoF3BR0",
+      "vibe": "natural, conversational",
+      "use_for": "product demos, casual B2C, dev-tool walk-throughs",
+      "pace": "medium"
+    },
+    "liam": {
+      "id": "TX3LPaxmHKxFdv7VOQHJ",
+      "vibe": "energetic social-media creator",
+      "use_for": "high-energy app trailers, social ads, hype reels",
+      "pace": "fast"
+    }
+  },
+  "v3_emotion_tags": {
+    "[excited]": "lift energy, faster delivery — use for hooks, reveals, payoffs",
+    "[serious]": "drop energy, weighted delivery — use for stakes, problems",
+    "[upbeat]": "warm + bright — use for proof points, customer wins",
+    "[warm]": "softer, intimate — use for founder/brand moments",
+    "[confident]": "grounded, authoritative — use for claims and CTAs",
+    "[uplifting]": "rising tone — use for transitions into solution",
+    "[whispers]": "intimate aside — use sparingly for emphasis",
+    "[laughs]": "human break — use once max, never on a CTA",
+    "[sighs]": "weary acknowledgment — pairs with [serious] for problem framing"
+  },
+  "tts_substitutions": {
+    "API": "A P I",
+    "live": "Built on / Running on (verb-ambiguous, ElevenLabs reads as 'liv')",
+    "99.999%": "ninety-nine point nine percent",
+    "200M+": "over two hundred million",
+    "stripe.com": "stripe dot com",
+    "AI": "A I",
+    "URL": "U R L",
+    "CTA": "C T A"
+  }
+}

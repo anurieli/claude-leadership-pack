@@ -1,0 +1,97 @@
+<!--
+  Template: saas-30s
+  Aspect: 1920×1080 landscape, 30s, 6 beats × 5s
+  Replace TODO markers with site-specific content. See ../../references/composition-rules.md.
+-->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  /* TODO: replace with brand tokens from extracted/tokens.json */
+  :root {
+    --ink: #0A0A0A;
+    --paper: #F5F1E8;
+    --accent: #FF5B2E;
+    --accent-soft: #FFD9CC;
+    --muted: #6B6356;
+  }
+  html, body { margin: 0; background: var(--ink); }
+  #root { font-family: 'Inter', system-ui, sans-serif; color: var(--ink); background: var(--paper); }
+  .scene { position: absolute; inset: 0; opacity: 0; display: flex; align-items: center; justify-content: center; }
+  .grain {
+    position: absolute; inset: 0; pointer-events: none; z-index: 100;
+    mix-blend-mode: multiply; opacity: 0.06;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .caption-layer { position: absolute; left: 0; right: 0; bottom: 80px; display: flex; justify-content: center; z-index: 90; }
+  .caption {
+    position: absolute; opacity: 0;
+    background: var(--ink); color: var(--paper);
+    font-weight: 600; font-size: 32px; padding: 14px 24px; border-radius: 6px;
+    box-shadow: 4px 4px 0 var(--accent);
+  }
+  /* Beat 1 — Hook (0–5s). TODO: build the world. */
+  /* Beat 2 — Stakes (5–10s) */
+  /* Beat 3 — Brand answer (10–15s) */
+  /* Beat 4 — Proof (15–20s) */
+  /* Beat 5 — Proof (20–25s) */
+  /* Beat 6 — CTA (25–30s) */
+</style>
+</head>
+<body>
+
+<div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+
+  <!-- AUDIO. Update data-duration to actual narration length + ~1.2s tail. -->
+  <audio id="narration" src="audio/narration.wav" data-start="0" data-duration="30" data-track-index="0" data-volume="1"></audio>
+  <audio id="music"     src="audio/music.wav"     data-start="0" data-duration="30" data-track-index="1" data-volume="0.12"></audio>
+  <!-- SFX: one <audio> per hit, unique data-track-index when same file overlaps in time. -->
+  <!-- <audio id="sfx-tap" src="audio/sfx/tap.mp3" data-start="0" data-duration="0.5" data-track-index="20" data-volume="0.55"></audio> -->
+
+  <!-- SCENES — opacity crossfaded by master timeline -->
+  <div class="scene" id="s1"><!-- TODO: hook (site's actual H1, paraphrased) --></div>
+  <div class="scene" id="s2"><!-- TODO: stakes --></div>
+  <div class="scene" id="s3"><!-- TODO: brand answer --></div>
+  <div class="scene" id="s4"><!-- TODO: proof point 1 --></div>
+  <div class="scene" id="s5"><!-- TODO: proof point 2 --></div>
+  <div class="scene" id="s6"><!-- TODO: CTA + logo lock --></div>
+
+  <!-- CAPTIONS. One div per sentence, swapped on word onset. -->
+  <div class="caption-layer">
+    <!-- <div class="caption" id="cap-1">First sentence text</div> -->
+  </div>
+
+  <div class="grain"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+  const tl = gsap.timeline({ paused: true });
+
+  // SCENE CROSSFADES (0.4s overlap at boundaries)
+  // Beat boundaries from word onsets in transcript.json
+  const beats = [0, 5, 10, 15, 20, 25, 30];
+  const ids = ['s1','s2','s3','s4','s5','s6'];
+  ids.forEach((id, i) => {
+    const start = beats[i];
+    const end   = beats[i+1];
+    tl.to(`#${id}`, { opacity: 1, duration: 0.4 }, start);
+    if (i < ids.length - 1) {
+      tl.to(`#${id}`, { opacity: 0, duration: 0.4 }, end - 0.2);
+    }
+  });
+
+  // TODO: per-beat element animations using gsap.from() — see references/composition-rules.md
+
+  // CAPTIONS — example: tl.fromTo('#cap-1', {opacity:0, y:8}, {opacity:1, y:0, duration:0.25}, 0.32);
+
+  // Pad timeline to ≥ root duration
+  tl.set({}, {}, 30);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+</script>
+
+</body>
+</html>

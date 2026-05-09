@@ -1,0 +1,8 @@
+{
+  "name": "content-pack",
+  "version": "1.0.0",
+  "description": "Skills for content creation: extracting reels and podcasts, generating marketing videos, and launching repos.",
+  "author": {
+    "name": "Ariel Nurieli"
+  }
+}

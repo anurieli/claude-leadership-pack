@@ -6,8 +6,14 @@
   "plugins": [
     {
       "name": "leadership-pack",
-      "source": "./",
-      "description": "The Claude Leadership Pack — shared skills and commands for project management, internal comms, skill creation, and autonomous development workflows",
+      "source": "./leadership-pack",
+      "description": "Skills and commands for project management, internal comms, skill creation, and autonomous development workflows.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "content-pack",
+      "source": "./content-pack",
+      "description": "Skills for content creation: extracting reels and podcasts, generating marketing videos, and launching repos.",
       "version": "1.0.0"
     }
   ]

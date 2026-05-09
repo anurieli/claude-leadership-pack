@@ -3,15 +3,17 @@ set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 CLAUDE_DIR="${HOME}/.claude"
+SOURCE_DIR="${REPO_DIR}/leadership-pack"
 
-echo "Installing Claude skills and commands from: ${REPO_DIR}"
+echo "Installing leadership-pack skills and commands from: ${SOURCE_DIR}"
+echo "(For content-pack and other plugins, use the Claude Code plugin system instead.)"
 
 # Ensure target directories exist
 mkdir -p "${CLAUDE_DIR}/skills"
 mkdir -p "${CLAUDE_DIR}/commands"
 
 # Install skills (symlink each skill directory)
-for skill_dir in "${REPO_DIR}"/skills/*/; do
+for skill_dir in "${SOURCE_DIR}"/skills/*/; do
   skill_name="$(basename "$skill_dir")"
   target="${CLAUDE_DIR}/skills/${skill_name}"
 
@@ -28,7 +30,7 @@ for skill_dir in "${REPO_DIR}"/skills/*/; do
 done
 
 # Install commands (symlink each command file)
-for cmd_file in "${REPO_DIR}"/commands/*.md; do
+for cmd_file in "${SOURCE_DIR}"/commands/*.md; do
   cmd_name="$(basename "$cmd_file")"
   target="${CLAUDE_DIR}/commands/${cmd_name}"
 
